@@ -5,14 +5,12 @@ module.exports = {
     return queryInterface.createTable('salesProducts', {
       saleId: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
         field: 'sale_id',
       },
       productId: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
         field: 'product_id',
