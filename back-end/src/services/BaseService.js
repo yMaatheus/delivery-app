@@ -27,6 +27,12 @@ class BaseService {
         return entity;
     }
 
+    async queryUpdate(where, body) {
+        const entity = await this.model.update(body, { where });
+        if (!entity) throw new CustomError(`${this.model.tableName} does not exist`);
+        return entity;
+    }
+
     async delete(id) {
         const entity = await this.model.findOne({ where: { id } });
         if (!entity) throw new CustomError(`${this.model.tableName} does not exist`);

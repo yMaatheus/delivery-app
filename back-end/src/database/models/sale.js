@@ -10,10 +10,10 @@ const saleModel = (sequelize, DataTypes) => {
     userId: {type: DataTypes.INTEGER, allowNull: false, foreignKey: true},
     sellerId: {type: DataTypes.INTEGER, allowNull: false, foreignKey: true},
     totalPrice: DataTypes.DECIMAL(9, 2),
-    deliveryAdress: DataTypes.STRING,
+    deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
 		saleDate: DataTypes.DATE,
-		status: DataTypes.STRING,
+		status: {type: DataTypes.STRING, defaultValue: 'Pendente'},
   }, {
     tableName: 'sales',
     timestamps: true,

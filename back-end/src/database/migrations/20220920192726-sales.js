@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.DECIMAL(9, 2),
         field: 'total_price',
       },
-      deliveryAdress: {
+      deliveryAddress: {
         allowNull: false,
         type: Sequelize.STRING,
         field: 'delivery_address',
@@ -49,11 +49,12 @@ module.exports = {
       saleDate: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: 'delivery_number',
+        field: 'sale_date',
       },
       status: {
         allowNull: false,
         type: Sequelize.STRING,
+        defaultValue: 'Pendente',
       },
     });
   },
