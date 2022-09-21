@@ -1,8 +1,9 @@
 const express = require('express');
 const {userControler} = require('../../factory');
 
-const userRoutes = express.Router();
+const router = express.Router();
 
-userRoutes.post('/register', userControler.create);
+router.route('/')
+  .post(userControler.create);
 
-module.exports = userRoutes;
+module.exports = router;

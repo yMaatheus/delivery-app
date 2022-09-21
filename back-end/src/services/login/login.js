@@ -11,9 +11,8 @@ const login = async (email, pass) => {
     throw new CustomError('Invalid email or password', StatusCodes.UNAUTHORIZED);
   }
   const { dataValues: { password, ...rest } } = user;
-  console.log('>>>>>>>>>', rest);
-  const newToken = tokenGenerator(rest);
-  return newToken;
+  const token = tokenGenerator(rest);
+  return { role: rest.role, token };
 };
 
 module.exports = login;

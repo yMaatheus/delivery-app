@@ -19,8 +19,8 @@ class UserService extends BaseService {
     const payload = user.get();
     delete payload.password;
     console.log('>>>>>>>>>', payload);
-    const newToken = tokenGenerator(payload);
-    return newToken;
+    const token = tokenGenerator(payload);
+    return {role: payload.role, token};
 }
 
   async create(body) {
