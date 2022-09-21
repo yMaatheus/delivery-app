@@ -4,6 +4,6 @@ const { userController } = require('../../factory');
 const router = express.Router();
 
 router.route('/')
-  .post(userController.create);
+  .post((req, res) => userController.create(req, res));
 
 module.exports = router;
