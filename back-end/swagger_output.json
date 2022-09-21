@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/coffee": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "418": {
+            "description": "I'm a teapot"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "example": "Jhon Doe"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "hello world"
+                }
+              },
+              "required": [
+                "user",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    }
+  }
+}
