@@ -1,4 +1,5 @@
 {
   "root": true,
-  "extends": ["trybe-backend"]
+  "extends": ["trybe-backend"],
+  "parser": "babel-eslint"
 }
