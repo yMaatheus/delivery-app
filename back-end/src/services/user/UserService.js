@@ -4,6 +4,7 @@ const BaseService = require('../BaseService');
 const { tokenGenerator } = require('../token');
 const { User } = require('../../database/models');
 const CustomError = require('../../utils/customError');
+const userCreateValidator = require('./Validator');
 
 class UserService extends BaseService {
   constructor(model = User) {
@@ -11,6 +12,7 @@ class UserService extends BaseService {
 }
 
   async create(body) {
+    userCreateValidator(body);
     const { password } = body;
     const hashedPassword = md5(password);
     const [user, created] = await this.model.findOrCreate({
