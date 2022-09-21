@@ -1,9 +1,8 @@
 const CustomError = require('../utils/customError');
 
 class BaseService {
-    constructor(model, validator) {
+    constructor(model) {
         this.model = model;
-        this.validator = validator;
     }
 
     async create(body) {

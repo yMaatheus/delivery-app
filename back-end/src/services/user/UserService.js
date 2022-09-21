@@ -4,13 +4,15 @@ const BaseService = require('../BaseService');
 const { tokenGenerator } = require('../token');
 const { User } = require('../../database/models');
 const CustomError = require('../../utils/customError');
+const loginValidator = require('./Validator');
 
 class UserService extends BaseService {
-  constructor(model = User, validator) {
-  super(model, validator);
+  constructor(model = User) {
+  super(model);
 }
 
   async login(email, pass) {
+    loginValidator({ email, password: pass });
     const hashedPassword = md5(pass);
     const user = await this.model.findOne({ where: { email, password: hashedPassword } });
     if (!user) {
@@ -20,7 +22,7 @@ class UserService extends BaseService {
     delete payload.password;
     console.log('>>>>>>>>>', payload);
     const token = tokenGenerator(payload);
-    return {role: payload.role, token};
+    return { role: payload.role, token };
 }
 
   async create(body) {
@@ -28,7 +30,7 @@ class UserService extends BaseService {
     const hashedPassword = md5(password);
     const [user, created] = await this.model.findOrCreate({
         where: { email: body.email },
-        defaults: {...body, password: hashedPassword},
+        defaults: { ...body, password: hashedPassword },
       });
     if (!created) throw new CustomError('User allready exists', StatusCodes.CONFLICT);        
     const payload = user.get();

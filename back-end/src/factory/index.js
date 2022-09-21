@@ -2,9 +2,12 @@ const BaseService = require('../services/BaseService');
 const { User } = require('../database/models');
 const BaseController = require('../api/controllers/BaseController');
 const UserService = require('../services/user/UserService');
-const UserController = require('../api/controllers/user/user.controller');
+const LoginController = require('../api/controllers/login/login.controller');
 
 
-const userControler = new UserController();
+const loginController = new LoginController();
 
-module.exports = { userControler };
+const userService = new UserService(User);
+const userController = new BaseController(userService);
+
+module.exports = { loginController, userController };
