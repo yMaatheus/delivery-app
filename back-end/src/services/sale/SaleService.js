@@ -1,13 +1,17 @@
 const { StatusCodes } = require('http-status-codes');
 const BaseService = require('../BaseService');
 const { Sale, Sequelize, SaleProduct } = require('../../database/models');
-const { productValidate, saleValidate } = require('./Validator');
+const { getSaleProducts, totalPriceValidate, saleValidate } = require('./Validator');
 const config = require('../../database/config/config');
 const AppError = require('../../providers/AppError');
 
 const sequelize = new Sequelize(config.development);
 
 class SaleService extends BaseService {
+  /**
+   * @constructor
+   * @param {import('sequelize/types').ModelDefined<{},{}>} 
+   */
   constructor(model = Sale) {
     super(model);
   }
@@ -15,8 +19,8 @@ class SaleService extends BaseService {
   async create(body) {
     saleValidate(body);
     const { sale, product } = body;
-    await productValidate(product);
-
+    const saleProducts = await getSaleProducts(product);
+    totalPriceValidate(saleProducts, sale.totalPrice);
     const result = await sequelize.transaction(async (t) => {
       const newSale = await this.model.create(sale, { transaction: t });
       await SaleProduct.bulkCreate(product.map(({ productId, quantity }) => ({
@@ -25,8 +29,7 @@ class SaleService extends BaseService {
         quantity,
       })), { transaction: t });
       return newSale.get();
-    });
-    
+    });    
     return result;
   }
 
