@@ -26,11 +26,10 @@ class SaleService extends BaseService {
     return result;
   }
 
-  async queryUpdate(query, body) {
-    console.log(query);
+  async queryUpdate(body, query) {
     const entity = await SaleProduct.update(body, { where: query });
     if (!entity) throw new CustomError(`${this.model.tableName} does not exist`);
-    return entity;
+    return SaleProduct.findOne({ where: query });
 }
 }
 
