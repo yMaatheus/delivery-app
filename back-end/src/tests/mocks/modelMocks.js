@@ -3,6 +3,7 @@ const entitiesMocks = require("./entitiesMocks")
 class ModelMock {
   constructor(mock = entitiesMocks) {
     this.mock = mock
+    this.tableName = 'entities'
   }
 
   async create(mock) {
@@ -15,17 +16,22 @@ class ModelMock {
     return this.mock.allEntities
   }
 
-  async findOne(entId) {
+  async findOne(ent) {
+    let entId = ent;
+    if (ent.where) entId = ent.where.id;
+
     const entity = this.mock.allEntities.find(({ id }) => id === entId)
+    if (!entity) return null
+    
     return entity;
   }
 
-  async update(_id, body) {
-    return body
-  }
+  async update({ anyKey }, { where: { id: entId } }) {
+    const entity = this.mock.allEntities.find(({ id }) => id === entId)
 
-  async destroy() {
-    return null
+    if (!entity) return null 
+    
+    return { ...entity, anyKey }
   }
 }
 
