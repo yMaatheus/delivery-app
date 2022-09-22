@@ -7,10 +7,8 @@ class SaleController extends BaseController {
     super(service);
   }
 
-  async queryUpdate(req, res) {
-    const { saleId: s, productId: p } = req.query;
-    const query = { saleId: Number(s), productId: Number(p) };
-    const request = await this.service.queryUpdate(req.body, query);
+  async update(req, res) {
+    const request = await this.service.update(req.body);
     return res.status(StatusCodes.OK).json(request);
   }
 }

@@ -1,6 +1,8 @@
+const { StatusCodes } = require('http-status-codes');
 const BaseService = require('../BaseService');
 const CustomError = require('../../utils/customError');
 const { Sale, Sequelize, SaleProduct } = require('../../database/models');
+const { productValidate, saleValidate } = require('./Validator');
 const config = require('../../database/config/config');
 
 const sequelize = new Sequelize(config.development);
@@ -11,25 +13,30 @@ class SaleService extends BaseService {
 }
 
   async create(body) {
+    saleValidate(body);
     const { sale, product } = body;
-    console.log(this);
+    await productValidate(product);
     const result = await sequelize.transaction(async (t) => {
     const newSale = await this.model.create(sale, { transaction: t });
-      console.log(newSale);
-      await SaleProduct.bulkCreate(product.map((item) => ({
+      await SaleProduct.bulkCreate(product.map(({ productId, quantity }) => ({
         saleId: newSale.id,
-        productId: item.productId,
-        quantity: item.quantity,
+        productId,  
+        quantity,
       })), { transaction: t });
       return newSale.get();
     });
     return result;
   }
 
-  async queryUpdate(body, query) {
-    const entity = await SaleProduct.update(body, { where: query });
-    if (!entity) throw new CustomError(`${this.model.tableName} does not exist`);
-    return SaleProduct.findOne({ where: query });
+  async update(body) {
+    const { saleId, productId } = body;
+    const entity = await SaleProduct.update(body, 
+      { where: { saleId, productId } });
+    if (!entity) {
+ throw new CustomError(`${this.model.tableName} does not exist`, 
+    StatusCodes.NOT_FOUND); 
+}
+    return body;
 }
 }
 

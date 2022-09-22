@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.route('/')
   .post((req, res) => saleController.create(req, res))
-  .put((req, res) => saleController.queryUpdate(req, res));
+  .put((req, res) => saleController.update(req, res));
 
 module.exports = router;
