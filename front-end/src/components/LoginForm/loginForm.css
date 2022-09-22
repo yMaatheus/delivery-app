@@ -1,0 +1,29 @@
+.box {
+  margin-left: 30%;
+  margin-top: 25%;
+  width: 40%;
+}
+
+.login-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  margin: 0;
+}
+
+input {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  margin-bottom: 10px;
+  width: 70%;
+}
