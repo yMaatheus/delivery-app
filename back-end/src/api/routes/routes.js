@@ -4,14 +4,14 @@ const userRoutes = require('./user.routes');
 const productRoutes = require('./product.routes');
 const imagesRoutes = require('./images.routes');
 const salesRoutes = require('./sales.routes');
-const tokenMiddleware = require('../middlewares/tokenMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const routes = express.Router();
 
 routes.use('/login', loginRoutes);
 routes.use('/users', userRoutes);
 routes.use('/images', imagesRoutes);
-routes.use('/products', tokenMiddleware, productRoutes);
-routes.use('/sales', tokenMiddleware, salesRoutes);
+routes.use('/products', authMiddleware, productRoutes);
+routes.use('/sales', authMiddleware, salesRoutes);
 
 module.exports = routes;

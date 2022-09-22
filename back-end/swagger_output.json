@@ -11,64 +11,73 @@
     "http"
   ],
   "paths": {
-    "/coffee": {
-      "get": {
+    "/login/": {
+      "post": {
         "description": "",
         "parameters": [],
-        "responses": {
-          "418": {
-            "description": "I'm a teapot"
-          }
-        }
+        "responses": {}
       }
     },
-    "/user": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
+    "/users/": {
+      "post": {
         "description": "",
         "parameters": [],
+        "responses": {}
+      }
+    },
+    "/images/{fileName}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
+      }
+    },
+    "/products/": {
+      "get": {
         "description": "",
         "parameters": [
           {
-            "name": "obj",
-            "in": "body",
-            "description": "Some description...",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user": {
-                  "type": "string",
-                  "example": "Jhon Doe"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "hello world"
-                }
-              },
-              "required": [
-                "user",
-                "password"
-              ]
-            }
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
-        "responses": {
-          "201": {
-            "description": "Created"
+        "responses": {}
+      }
+    },
+    "/sales/": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
-        }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {}
       }
     }
   }

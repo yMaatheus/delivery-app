@@ -1,11 +1,11 @@
 const { StatusCodes } = require('http-status-codes');
-const CustomError = require('../../utils/customError');
+const AppError = require('../../providers/AppError');
 const loginSchema = require('../../schemas/loginSchema');
 
 const loginValidator = (login) => {
   const { error } = loginSchema.validate(login);
   if (error) {
-    throw new CustomError(error.message, StatusCodes.BAD_REQUEST);
+    throw new AppError(error.message, StatusCodes.BAD_REQUEST);
   }
 };
 
