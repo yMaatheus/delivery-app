@@ -10,7 +10,7 @@ class BaseController {
     return res.status(StatusCodes.CREATED).json(request);
   }
 
-  async getAll(req, res) {
+  async getAll(_req, res) {
     const request = await this.service.getAll();
     return res.status(StatusCodes.OK).json(request);
   }
