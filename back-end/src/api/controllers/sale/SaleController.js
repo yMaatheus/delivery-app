@@ -8,7 +8,6 @@ class SaleController extends BaseController {
   }
 
   async update(req, res) {
-    // #swagger.tags = ['Sales']
     const request = await this.service.update(req.body);
     return res.status(StatusCodes.OK).json(request);
   }
