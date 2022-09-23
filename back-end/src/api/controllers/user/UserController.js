@@ -1,17 +1,16 @@
 const { StatusCodes } = require('http-status-codes');
 const BaseController = require('../BaseController');
-const LoginService = require('../../../services/login/LoginService');
+const UserService = require('../../../services/user/UserService');
 
-class LoginController extends BaseController {
-  constructor(service = new LoginService()) {
+class UserController extends BaseController {
+  constructor(service = new UserService()) {
     super(service);
   }
 
-  async create(req, res) {
-    // #swagger.tags = ['Users']
+  async login(req, res) {
     const payload = await this.service.login(req.body.email, req.body.password);
     return res.status(StatusCodes.OK).json(payload);
   }
 }
 
-module.exports = LoginController;
+module.exports = UserController;
