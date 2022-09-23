@@ -4,11 +4,11 @@ const saleSchema = require('../../schemas/saleSchema');
 const AppError = require('../../providers/AppError');
 
 const getSaleProducts = async (products) => Promise.all(products.map(async (p) => {
-    const product = await Product.findByPk(p.productId);
-    product.quantity = p.quantity;
+  const product = await Product.findByPk(p.productId);
   if (!product) throw new AppError('Wrong product ID', StatusCodes.UNPROCESSABLE_ENTITY);
+  product.quantity = p.quantity;
   return product;
-  }));
+}));
 
 const totalPriceValidate = (saleProducts, totalPrice) => {
   const dbPrice = saleProducts.reduce((acc, { quantity, price }) => acc + (quantity * price), 0)
