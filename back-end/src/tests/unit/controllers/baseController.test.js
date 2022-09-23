@@ -123,7 +123,7 @@ describe("Tests the BaseController", () => {
       await baseController.delete(req, res);
 
       expect(res.status.calledWith(StatusCodes.OK)).to.be.true;
-      expect(res.json.calledWith(delRetur)).to.be.true;      
+      expect(res.json.calledWith(delReturn)).to.be.true;      
     });
   });
 });
