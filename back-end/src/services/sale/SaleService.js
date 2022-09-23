@@ -1,13 +1,19 @@
 const { StatusCodes } = require('http-status-codes');
+const fs = require('fs').promises;
+const Models = require('../../database/models');
 const BaseService = require('../BaseService');
 const { Sale, Sequelize, SaleProduct } = require('../../database/models');
-const { productValidate, saleValidate } = require('./Validator');
+const { getSaleProducts, totalPriceValidate, saleValidate } = require('./Validator');
 const config = require('../../database/config/config');
 const AppError = require('../../providers/AppError');
 
 const sequelize = new Sequelize(config.development);
 
 class SaleService extends BaseService {
+  /**
+   * @constructor
+   * @param {import('sequelize/types').ModelDefined<{},{}>} 
+   */
   constructor(model = Sale) {
     super(model);
   }
@@ -15,8 +21,8 @@ class SaleService extends BaseService {
   async create(body) {
     saleValidate(body);
     const { sale, product } = body;
-    await productValidate(product);
-
+    const saleProducts = await getSaleProducts(product);
+    totalPriceValidate(saleProducts, sale.totalPrice);
     const result = await sequelize.transaction(async (t) => {
       const newSale = await this.model.create(sale, { transaction: t });
       await SaleProduct.bulkCreate(product.map(({ productId, quantity }) => ({
@@ -25,8 +31,7 @@ class SaleService extends BaseService {
         quantity,
       })), { transaction: t });
       return newSale.get();
-    });
-    
+    });    
     return result;
   }
 
@@ -37,6 +42,19 @@ class SaleService extends BaseService {
       throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND);
     }
     return body;
+  }
+
+  async getOne(where) {
+    console.log(where);
+    const query = await fs.readFile('./src/database/queries/getSaleDetails.sql', 'utf8');
+    const [entity] = await Models.sequelize.query(query, {
+      replacements: [where.id],
+      type: Models.sequelize.QueryTypes.SELECT,
+      });
+    if (!entity) { 
+      throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND); 
+    }    
+    return entity;
   }
 }
 

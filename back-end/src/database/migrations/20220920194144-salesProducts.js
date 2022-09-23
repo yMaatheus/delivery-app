@@ -14,6 +14,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
         field: 'product_id',
+        references: {
+          model: 'products',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        field: 'product_id'
       },
       quantity: {
         allowNull: false,

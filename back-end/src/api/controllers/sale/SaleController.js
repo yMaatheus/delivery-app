@@ -11,6 +11,12 @@ class SaleController extends BaseController {
     const request = await this.service.update(req.body);
     return res.status(StatusCodes.OK).json(request);
   }
+
+  async getOne(req, res) {
+    const { id } = req.params;
+    const request = await this.service.getOne({ id });
+    return res.status(StatusCodes.OK).json(request);
+  }
 }
 
 module.exports = SaleController;

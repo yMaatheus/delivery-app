@@ -3,11 +3,19 @@ const { Product } = require('../../database/models');
 const saleSchema = require('../../schemas/saleSchema');
 const AppError = require('../../providers/AppError');
 
-const productValidate = async (products) => {
-  const allProducts = await Product.findAll();
-  const dbproductsIds = allProducts.map(({ id }) => id);
-  const exists = products.every(({ productId }) => dbproductsIds.includes(productId));
-  if (!exists) throw new AppError('Wrong product ID', StatusCodes.UNPROCESSABLE_ENTITY);
+const getSaleProducts = async (products) => Promise.all(products.map(async (p) => {
+  const product = await Product.findByPk(p.productId);
+  if (!product) throw new AppError('Wrong product ID', StatusCodes.UNPROCESSABLE_ENTITY);
+  product.quantity = p.quantity;
+  return product;
+}));
+
+const totalPriceValidate = (saleProducts, totalPrice) => {
+  const dbPrice = saleProducts.reduce((acc, { quantity, price }) => acc + (quantity * price), 0)
+  .toFixed(2);  
+  if (dbPrice !== totalPrice.toFixed(2)) { 
+    throw new AppError(`Wrong total price, try $${dbPrice}`, StatusCodes.UNPROCESSABLE_ENTITY); 
+  }
 };
 
 const saleValidate = (body) => {
@@ -15,4 +23,4 @@ const saleValidate = (body) => {
   if (error) throw new AppError(error.message, StatusCodes.BAD_REQUEST);
 };
 
-module.exports = { productValidate, saleValidate };
+module.exports = { getSaleProducts, totalPriceValidate, saleValidate };

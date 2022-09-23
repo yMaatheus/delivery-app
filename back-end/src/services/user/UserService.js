@@ -11,6 +11,10 @@ class UserService extends BaseService {
     super(model);
   }
 
+  async register(body) {
+    return this.create({ ...body, role: 'customer' });
+  }
+    
   static hashPassword(value) {
     return md5(value);
   }
