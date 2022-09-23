@@ -1,4 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
+const fs = require('fs').promises;
+const Models = require('../../database/models');
 const BaseService = require('../BaseService');
 const { Sale, Sequelize, SaleProduct } = require('../../database/models');
 const { getSaleProducts, totalPriceValidate, saleValidate } = require('./Validator');
@@ -40,6 +42,19 @@ class SaleService extends BaseService {
       throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND);
     }
     return body;
+  }
+
+  async getOne(where) {
+    console.log(where);
+    const query = await fs.readFile('./src/database/queries/getSaleDetails.sql', 'utf8');
+    const [entity] = await Models.sequelize.query(query, {
+      replacements: [where.id],
+      type: Models.sequelize.QueryTypes.SELECT,
+      });
+    if (!entity) { 
+      throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND); 
+    }    
+    return entity;
   }
 }
 
