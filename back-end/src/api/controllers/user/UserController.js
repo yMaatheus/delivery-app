@@ -1,9 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 const BaseController = require('../BaseController');
-const LoginService = require('../../../services/login/LoginService');
+const UserService = require('../../../services/user/UserService');
 
-class LoginController extends BaseController {
-  constructor(service = new LoginService()) {
+class UserController extends BaseController {
+  constructor(service = new UserService()) {
     super(service);
   }
 
@@ -13,4 +13,4 @@ class LoginController extends BaseController {
   }
 }
 
-module.exports = LoginController;
+module.exports = UserController;
