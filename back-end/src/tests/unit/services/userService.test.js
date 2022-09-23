@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { User } = require('../../../database/models');
-const { userMock, userValidMock } = require('../../mocks/userMock');
+const { userMockWithId, userValidMock, userMockSequelize } = require('../../mocks/userMock');
 const Jwt = require('../../../providers/Jwt');
 const AppError = require('../../../providers/AppError');
 const UserService = require('../../../services/user/UserService');
@@ -16,7 +16,7 @@ describe('User Service', () => {
   describe('Create', () => {
     it('Success', async () => {
       sinon.stub(userSchema, 'validate').resolves();
-      sinon.stub(User, 'findOrCreate').resolves([userMock, true]);
+      sinon.stub(User, 'findOrCreate').resolves([userMockSequelize, true]);
       sinon.stub(Jwt, 'sign').returns('TOKEN_VALIDO');
 
       const result = await userService.create({ password: userValidMock.password });
