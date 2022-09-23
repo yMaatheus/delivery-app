@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const LoginService = require('../../../services/login/LoginService');
 const { User } = require('../../../database/models');
-const { userMock, userValidMock } = require('../../mocks/userMock');
+const { userMockWithId, userValidMock } = require('../../mocks/userMock');
 const loginSchema = require('../../../schemas/loginSchema');
 const Jwt = require('../../../providers/Jwt');
 const AppError = require('../../../providers/AppError');
@@ -16,7 +16,7 @@ describe('Login Service', () => {
   describe('Login', () => {
     it('Success', async () => {
       sinon.stub(loginSchema, 'validate').resolves();
-      sinon.stub(User, 'findOne').resolves(userMock);
+      sinon.stub(User, 'findOne').resolves(userMockWithId);
       sinon.stub(Jwt, 'sign').returns('TOKEN_VALIDO');
 
       const result = await loginService.login(userValidMock.email, userValidMock.password);
@@ -39,7 +39,7 @@ describe('Login Service', () => {
         expect(error.statusCode).to.be.equal(StatusCodes.BAD_REQUEST);
       })
 
-      it('Email not found or password not match', async () => {
+      it('User not created', async () => {
         sinon.stub(loginSchema, 'validate').returns({ error: false });
         sinon.stub(User, 'findOne').resolves(null);
 

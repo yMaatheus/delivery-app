@@ -7,8 +7,7 @@ class LoginController extends BaseController {
     super(service);
   }
 
-  async create(req, res) {
-    // #swagger.tags = ['Users']
+  async login(req, res) {
     const payload = await this.service.login(req.body.email, req.body.password);
     return res.status(StatusCodes.OK).json(payload);
   }
