@@ -5,8 +5,8 @@ const Jwt = require('../../providers/Jwt');
 module.exports = (req, _res, next) => {
   const { authorization } = req.headers;
 
-  const { data: user } = Jwt.verify(authorization);
-  if (user.role !== 'admin') {
+  const user = Jwt.verify(authorization);
+  if (user.role !== 'administrator') {
     throw new AppError('Only admin can use this route', StatusCodes.UNAUTHORIZED);
   }
 
