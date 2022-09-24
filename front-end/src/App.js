@@ -1,11 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+
 import UnauthenticatedApp from './UnauthenticatedApp';
 
+import { useUser } from './context/user-context';
+
 function App() {
+  const { user } = useUser();
+
   return (
     <Router>
-      <UnauthenticatedApp />
+      <Switch>
+        {user ? <p>oi</p> : <UnauthenticatedApp />}
+      </Switch>
     </Router>
   );
 }
