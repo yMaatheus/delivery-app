@@ -31,7 +31,7 @@ class SaleService extends BaseService {
         quantity,
       })), { transaction: t });
       return newSale.get();
-    });    
+    });
     return result;
   }
 
@@ -51,9 +51,9 @@ class SaleService extends BaseService {
       replacements: [where.id],
       type: Models.sequelize.QueryTypes.SELECT,
       });
-    if (!entity) { 
-      throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND); 
-    }    
+    if (!entity) {
+      throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND);
+    }
     return entity;
   }
 }
