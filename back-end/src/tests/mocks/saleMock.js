@@ -32,4 +32,11 @@ const saleStatusMock = {
   "saleDate": "2022-09-24T21:41:28.637Z"
 }
 
-module.exports = { saleAndProductMock, saleMock, saleStatusMock };
+const productMock = {
+  id: 1,
+  name: 'Skol Lata 250ml',
+  price: '2.20',
+  urlImage: 'http://localhost:3001/images/skol_lata_350ml.jpg'
+}
+
+module.exports = { saleAndProductMock, productMock, saleMock, saleStatusMock };

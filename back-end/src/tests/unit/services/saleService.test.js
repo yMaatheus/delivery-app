@@ -4,8 +4,8 @@ const { StatusCodes } = require('http-status-codes');
 const AppError = require('../../../providers/AppError');
 const SaleService = require('../../../services/sale/SaleService');
 const saleSchema = require('../../../schemas/saleSchema');
-const { Sale, SaleProduct } = require('../../../database/models');
-const { saleMock, saleAndProductMock } = require('../../mocks/saleMock');
+const { Sale, SaleProduct, Product } = require('../../../database/models');
+const { saleMock, saleAndProductMock, productMock } = require('../../mocks/saleMock');
 const fs = require('fs').promises;
 const Models = require('../../../database/models');
 
@@ -18,6 +18,7 @@ describe('Sale Service', () => {
     it('Success', async () => {
       sinon.stub(Sale, 'create').resolves(saleMock);
       sinon.stub(SaleProduct, 'bulkCreate').resolves(saleMock);
+      sinon.stub(Product, 'findByPk').resolves({ ...productMock, quantity: 5 });
       const result = await saleService.create(saleAndProductMock);
       
       expect(result).to.be.have.property('status');
