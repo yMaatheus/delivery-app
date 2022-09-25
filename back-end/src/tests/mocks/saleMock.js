@@ -39,4 +39,18 @@ const productMock = {
   urlImage: 'http://localhost:3001/images/skol_lata_350ml.jpg'
 }
 
-module.exports = { saleAndProductMock, productMock, saleMock, saleStatusMock };
+const saleDetailsMock = {
+  id: 1,
+  customer: 'Delivery App Admin',
+  delivery_address: 'rua joao carlos',
+  delivery_number: '200',
+  seller: 'Cliente Zé Birita',
+  products: [
+    {
+      name: 'Skol Lata 250ml',
+      quantity: 5
+    }
+  ]
+}
+
+module.exports = { saleAndProductMock, saleDetailsMock, productMock, saleMock, saleStatusMock };

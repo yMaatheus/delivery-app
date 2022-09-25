@@ -3,6 +3,8 @@ const sinon = require("sinon");
 const { StatusCodes } = require("http-status-codes");
 const SaleController = require("../../../api/controllers/sale/SaleController");
 const { SaleProduct } = require('../../../database/models');
+const SaleService = require("../../../services/sale/SaleService");
+const { saleDetailsMock } = require("../../mocks/saleMock");
 
 describe('Sale Controller', () => {
   const saleController = new SaleController();
@@ -30,6 +32,7 @@ describe('Sale Controller', () => {
 
   describe('getOne', () => {
     it('Success', async () => {
+      sinon.stub(SaleService, 'getSaleDetails').resolves(saleDetailsMock);
       req.params = { id: 1 };
       await saleController.update(req, res);
 

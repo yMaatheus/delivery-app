@@ -5,7 +5,7 @@ const AppError = require('../../../providers/AppError');
 const SaleService = require('../../../services/sale/SaleService');
 const saleSchema = require('../../../schemas/saleSchema');
 const { Sale, SaleProduct, Product } = require('../../../database/models');
-const { saleMock, saleAndProductMock, productMock } = require('../../mocks/saleMock');
+const { saleMock, saleAndProductMock, productMock, saleDetailsMock } = require('../../mocks/saleMock');
 const fs = require('fs').promises;
 const Models = require('../../../database/models');
 
@@ -20,7 +20,7 @@ describe('Sale Service', () => {
       sinon.stub(SaleProduct, 'bulkCreate').resolves(saleMock);
       sinon.stub(Product, 'findByPk').resolves({ ...productMock, quantity: 5 });
       const result = await saleService.create(saleAndProductMock);
-      
+
       expect(result).to.be.have.property('status');
       expect(result).to.be.have.property('id');
       expect(result).to.be.have.property('userId');
@@ -86,17 +86,14 @@ describe('Sale Service', () => {
     })
   })
 
-  // TODO: ver como mockar o sequelize.query
+  describe('getOne', () => {
+    it('Success', async () => {
+      sinon.stub(SaleService, 'getSaleDetails').resolves(saleDetailsMock);
+      const result = await saleService.getOne({ id: 1 });
 
-  // describe('getOne', () => {
-  //   it('Success', async () => {
-  //     sinon.stub(fs, 'readFile').resolves();
-  //     sinon.stub(Models, 'sequelize').resolves([[{ id: 1, name: 'Mock' }]]);
-  //     const result = await saleService.getOne({ id: 1 });
-
-  //     expect(result).to.be.have.property('id');
-  //     expect(result).to.be.have.property('name');
-  //   })
-  // })
+      expect(result).to.be.have.property('id');
+      expect(result.id).to.equal(1);
+    })
+  })
 
 });
