@@ -24,7 +24,7 @@ class UserService extends BaseService {
     
     const hashedPassword = UserService.hashPassword(pass);
     const user = await this.model.findOne({ where: { email, password: hashedPassword } });
-    if (!user) throw new AppError('Invalid email or password', StatusCodes.UNAUTHORIZED);
+    if (!user) throw new AppError('Invalid email or password', StatusCodes.NOT_FOUND);
     
     const payload = user.get();
     delete payload.password;
