@@ -1,6 +1,9 @@
+import React from 'react';
+import ProductList from '../components/ProductList';
+
 function Customer() {
   return (
-    <p>oi</p>
+    <ProductList />
   );
 }
 
