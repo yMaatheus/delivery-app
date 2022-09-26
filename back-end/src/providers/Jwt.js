@@ -1,8 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const CustomError = require('./AppError');
 
-const { JWT_SECRET } = process.env;
+const JWT_SECRET = fs.readFileSync('./jwt.evaluation.key', 'utf8');
 
 class Jwt {
   constructor(provider, secret) {
