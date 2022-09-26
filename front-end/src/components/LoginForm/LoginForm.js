@@ -47,7 +47,7 @@ function LoginForm() {
           LOGIN
         </button>
         <button
-          data-testid="common_login__button-regster"
+          data-testid="common_login__button-register"
           type="button"
         >
           Ainda não tenho conta
