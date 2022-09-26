@@ -5,7 +5,8 @@ import LoginForm from './components/LoginForm';
 function UnauthenticatedApp() {
   return (
     <Switch>
-      <Route path="/login" component={ LoginForm } />
+      <Route exact path="/login" component={ LoginForm } />
+      {/* <Route exact path="/register" component={ RegisterUser } /> */}
       <Redirect to="/login" />
     </Switch>
   );
