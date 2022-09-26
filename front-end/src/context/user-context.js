@@ -2,7 +2,7 @@ const { useCallback, useEffect, useContext, useMemo } = require('react');
 const { useState } = require('react');
 const { createContext } = require('react');
 const { setToken, clearToken, getToken } = require('../helpers/auth');
-const { getMe } = require('../services/users');
+const { getMe, login: loginUser, register: registerUser } = require('../services/users');
 
 const UserContext = createContext({});
 
@@ -35,9 +35,18 @@ function UserProvider(props) {
 
   const login = useCallback(async (credentials) => {
     try {
-      const loginResponse = await login(credentials);
+      const loginResponse = await loginUser(credentials);
       setToken(loginResponse.token);
       setUser(loginResponse);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }, []);
+
+  const register = useCallback(async (credentials) => {
+    try {
+      const registerResponse = await registerUser(credentials);
+      console.log(registerResponse);
     } catch (error) {
       console.log('error', error);
     }
@@ -52,8 +61,9 @@ function UserProvider(props) {
     user,
     isFetchingUser,
     login,
+    register,
     logout,
-  }), [isFetchingUser, login, user]);
+  }), [isFetchingUser, login, register, user]);
 
   return (
     <UserContext.Provider

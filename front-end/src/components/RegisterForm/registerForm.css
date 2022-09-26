@@ -1,0 +1,32 @@
+.box {
+  border: 1px solid black;
+  margin-left: 30%;
+  margin-top: 20%;
+  width: 40%;
+}
+
+.register-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  margin: 20px 0 0;
+}
+
+input {
+  height: 20px;
+}
+
+button {
+  border: 1px solid black;
+  cursor: pointer;
+  height: 30px;
+  margin-top: 20px;
+  width: 70%;
+}
+
+button:last-child {
+  margin-bottom: 20px;
+}

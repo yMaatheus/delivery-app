@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
-const minCharacters = 6;
+const minCharactersName = 12;
+const minCharactersPassWord = 6;
 
 yup.setLocale({
   mixed: {
@@ -10,7 +11,20 @@ yup.setLocale({
 
 export const loginSchema = yup.object({
   email: yup.string().email('Email inválido').required(),
-  password: yup.string().min(minCharacters, 'senha abaixo de 6 caracteres').required(),
+  password: yup
+    .string()
+    .min(minCharactersPassWord, 'senha abaixo de 6 caracteres')
+    .required(),
 });
 
-export const registerSchema = yup.object({});
+export const registerSchema = yup.object({
+  name: yup
+    .string()
+    .min(minCharactersName, 'nome completo muito curto')
+    .required(),
+  email: yup.string().email('Email inválido').required(),
+  password: yup
+    .string()
+    .min(minCharactersPassWord, 'senha abaixo de 6 caracteres')
+    .required(),
+});
