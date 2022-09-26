@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useHistory } from 'react-router-dom';
 import { registerSchema } from '../../helpers/yup-schemas';
 import { useUser } from '../../context/user-context';
 import './registerForm.css';
@@ -16,7 +17,12 @@ function RegisterForm() {
 
   const { register: registerUser } = useUser();
 
-  const onSubmit = (data) => registerUser(data);
+  const history = useHistory();
+
+  const onSubmit = (data) => {
+    registerUser(data);
+    history.push('/login');
+  };
 
   return (
     <div className="box">
