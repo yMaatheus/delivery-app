@@ -18,6 +18,15 @@ class SaleService extends BaseService {
     super(model);
   }
 
+  static async getSaleDetails(where) {
+    const query = await fs.readFile('./src/database/queries/getSaleDetails.sql', 'utf8');
+    const [entity] = await Models.sequelize.query(query, {
+      replacements: [where.id],
+      type: Models.sequelize.QueryTypes.SELECT,
+    });
+    return entity;
+  }
+
   async create(body) {
     saleValidate(body);
     const { sale, product } = body;
@@ -31,7 +40,7 @@ class SaleService extends BaseService {
         quantity,
       })), { transaction: t });
       return newSale.get();
-    });    
+    });
     return result;
   }
 
@@ -45,15 +54,10 @@ class SaleService extends BaseService {
   }
 
   async getOne(where) {
-    console.log(where);
-    const query = await fs.readFile('./src/database/queries/getSaleDetails.sql', 'utf8');
-    const [entity] = await Models.sequelize.query(query, {
-      replacements: [where.id],
-      type: Models.sequelize.QueryTypes.SELECT,
-      });
-    if (!entity) { 
-      throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND); 
-    }    
+    const entity = await SaleService.getSaleDetails(where);
+    if (!entity) {
+      throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND);
+    }
     return entity;
   }
 }
