@@ -64,7 +64,6 @@ function LoginForm() {
           {(errors?.email && `Email: ${errors.email.message}`)
             || (errors?.password && `senha: ${errors?.password?.message}`)}
         </p>
-        {console.log(errors, isDirty, isValid)}
       </form>
     </div>
   );

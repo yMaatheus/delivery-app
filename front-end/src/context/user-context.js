@@ -18,10 +18,6 @@ function UserProvider(props) {
         const userResponse = await getMe();
         return setUser(userResponse);
       }
-      if (['/login'].includes(window.location.pathname)) {
-        return;
-      }
-      window.location.href = '/login';
     } catch (error) {
       console.log('error', error);
     } finally {
@@ -46,7 +42,8 @@ function UserProvider(props) {
   const register = useCallback(async (credentials) => {
     try {
       const registerResponse = await registerUser(credentials);
-      console.log(registerResponse);
+      setToken(registerResponse.token);
+      setUser(registerResponse);
     } catch (error) {
       console.log('error', error);
     }
