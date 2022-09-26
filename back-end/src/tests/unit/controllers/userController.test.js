@@ -3,21 +3,18 @@ const sinon = require("sinon");
 const { StatusCodes } = require("http-status-codes");
 const UserService = require('../../../services/user/UserService');
 const UserController = require("../../../api/controllers/user/UserController");
-const loginSchema = require("../../../schemas/loginSchema");
-const { userMock, userValidMock, userMockWithId } = require('../../mocks/userMock');
+const { userValidMock, userMockWithId } = require('../../mocks/userMock');
 const { User } = require('../../../database/models');
 const Jwt = require("../../../providers/Jwt");
+const loginSchema = require("../../../schemas/loginSchema");
 
 describe('Login Controller', () => {
-  const userService = new UserService();
   const userController = new UserController();
   
   const req = {};
   const res = {};
 
   beforeEach(() => {
-    sinon.stub(userService, 'login').resolves(userMock);
-
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
   })
@@ -27,6 +24,7 @@ describe('Login Controller', () => {
   describe('Login', () => {
     it('Success', async () => {
       sinon.stub(loginSchema, 'validate').resolves();
+      sinon.stub(UserService, 'hashPassword').returns('fakePassword');
       sinon.stub(User, 'findOne').resolves(userMockWithId);
       sinon.stub(Jwt, 'sign').returns('TOKEN_VALIDO');
       req.body = { email: userValidMock.email, password: userValidMock.password };
