@@ -16,8 +16,7 @@ class BaseController {
   }
 
   async getOne(req, res) {
-    const request = await this.service.getOne(req.body);
-    
+    const request = await this.service.getOne(req.body);    
     return res.status(StatusCodes.OK).json(request);
   }
 
