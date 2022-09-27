@@ -1,0 +1,30 @@
+.header {
+  align-items: center;
+  background-color: #036b52;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.btnBox {
+  background-color: #2fc18c;
+  height: 100%;
+  width: auto;
+}
+
+.userName {
+  display: inline-block;
+  margin: 15px 20px;
+}
+
+.item {
+  background-color: inherit;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px 20px;
+}
