@@ -1,6 +1,8 @@
+import NavBar from '../components/NavBar/NavBar';
+
 function Customer() {
   return (
-    <p>oi</p>
+    <NavBar />
   );
 }
 

@@ -28,8 +28,9 @@ function LoginForm() {
     <div className="box">
       <form className="login-form" onSubmit={ handleSubmit(onSubmit) }>
         <label htmlFor="email">
-          <p>Email:</p>
+          <p className="label">Email:</p>
           <input
+            className="formLogin"
             data-testid="common_login__input-email"
             name="email"
             type="email"
@@ -38,8 +39,9 @@ function LoginForm() {
         </label>
 
         <label htmlFor="password">
-          <p>senha:</p>
+          <p className="label">senha:</p>
           <input
+            className="formLogin"
             data-testid="common_login__input-password"
             name="password"
             type="password"
@@ -47,6 +49,7 @@ function LoginForm() {
           />
         </label>
         <button
+          className="btnLogin"
           data-testid="common_login__button-login"
           type="submit"
           disabled={ !isDirty || !isValid }
@@ -54,6 +57,7 @@ function LoginForm() {
           LOGIN
         </button>
         <button
+          className="btnLogin"
           data-testid="common_login__button-register"
           type="button"
           onClick={ handleRegister }
