@@ -6,20 +6,20 @@ import { getAll } from '../../services/products';
 import ProductCard from '../ProductCard/ProductCard';
 
 function ProductList() {
-  const products = useProductsStore((state) => state.products);
+  const array = useProductsStore((state) => state.products);
 
   useEffect(() => {
     async function getProducts() {
-      const response = await getAll();
-      useProductsStore.setState({ products: response });
+      const products = await getAll();
+      useProductsStore.setState({ products });
     }
     getProducts();
   }, []);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <Grid container spacing={ 1 }>
-        {products?.map((product) => (
+        {array?.map((product) => (
           <Grid item key={ product.id } sx={ { width: '25%' } }>
             <ProductCard key={ product.id } { ...product } />
           </Grid>
