@@ -1,9 +1,13 @@
 import React from 'react';
 import ProductList from '../components/ProductList';
+import NavBar from '../components/NavBar';
 
 function Customer() {
   return (
-    <ProductList />
+    <>
+      <NavBar />
+      <ProductList />
+    </>
   );
 }
 
