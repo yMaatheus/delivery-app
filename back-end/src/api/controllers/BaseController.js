@@ -10,13 +10,13 @@ class BaseController {
     return res.status(StatusCodes.CREATED).json(request);
   }
 
-  async getAll(_req, res) {
-    const request = await this.service.getAll();
+  async getAll(req, res) {
+    const request = await this.service.getAll(req.body);
     return res.status(StatusCodes.OK).json(request);
   }
 
   async getOne(req, res) {
-    const request = await this.service.getOne(req.params.id);
+    const request = await this.service.getOne(req.body);    
     return res.status(StatusCodes.OK).json(request);
   }
 

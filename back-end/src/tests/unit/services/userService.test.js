@@ -8,6 +8,7 @@ const UserService = require('../../../services/user/UserService');
 const userSchema = require('../../../schemas/userSchema');
 const { StatusCodes } = require('http-status-codes');
 const loginSchema = require('../../../schemas/loginSchema');
+const  userValidator  = require('../../../services/user/Validator');
 
 describe('User Service', () => {
   const userService = new UserService();
@@ -41,21 +42,20 @@ describe('User Service', () => {
         expect(error.statusCode).to.be.equal(StatusCodes.BAD_REQUEST);
       })
 
-      it('User create error', async () => {
-        sinon.stub(loginSchema, 'validate').returns({ error: false });
-        sinon.stub(UserService, 'hashPassword').returns('fakePassword');
-        sinon.stub(User, 'findOne').resolves(null);
-
+      it('User Login error', async () => {
+        sinon.stub(loginSchema, 'validate').returns({ error: {message: 'invalid email'} });
+        // sinon.stub(UserService, 'hashPassword').returns('fakePassword');
+        // sinon.stub(User, 'findOne').resolves(null);
         let error;
         try {
-          await userService.login();
+          await userService.login({ email: 'fakeEmail', password: 'fakePassword' });
         } catch (err) {
+          console.log(err);
           error = err
         }
-
         expect(error).to.be.instanceOf(AppError);
-        expect(error.message).to.be.equal('Invalid email or password');
-        expect(error.statusCode).to.be.equal(StatusCodes.UNAUTHORIZED);
+        expect(error.message).to.be.equal('invalid email');
+        // expect(error.statusCode).to.be.equal(StatusCodes.UNAUTHORIZED);
       })
 
     })
