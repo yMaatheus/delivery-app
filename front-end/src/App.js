@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
+import { ScopedCssBaseline } from '@mui/material';
 import UnauthenticatedApp from './UnauthenticatedApp';
 
 import { useUser } from './context/user-context';
@@ -10,11 +11,13 @@ function App() {
   const { user } = useUser();
 
   return (
-    <Router>
-      <Switch>
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-      </Switch>
-    </Router>
+    <ScopedCssBaseline>
+      <Router>
+        <Switch>
+          {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        </Switch>
+      </Router>
+    </ScopedCssBaseline>
   );
 }
 
