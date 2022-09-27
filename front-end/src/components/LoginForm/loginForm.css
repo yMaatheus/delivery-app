@@ -11,15 +11,15 @@
   flex-direction: column;
 }
 
-p {
+.label {
   margin: 20px 0 0;
 }
 
-input {
+.formLogin {
   height: 20px;
 }
 
-button {
+.btnLogin {
   border: 1px solid black;
   cursor: pointer;
   height: 30px;
@@ -27,6 +27,6 @@ button {
   width: 70%;
 }
 
-button:last-child {
+.btnLogin:last-child {
   margin-bottom: 20px;
 }

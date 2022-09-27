@@ -29,7 +29,7 @@ class UserService extends BaseService {
     const payload = user.get();
     delete payload.password;
     const token = Jwt.sign(payload);
-    return { role: payload.role, token };
+    return { ...payload, token };
   }
 
   async create(body) {

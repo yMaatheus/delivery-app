@@ -32,6 +32,7 @@ function UserProvider(props) {
   const login = useCallback(async (credentials) => {
     try {
       const loginResponse = await loginUser(credentials);
+      console.log(loginResponse);
       setToken(loginResponse.token);
       setUser(loginResponse);
     } catch (error) {

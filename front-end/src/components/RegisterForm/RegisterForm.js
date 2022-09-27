@@ -24,8 +24,9 @@ function RegisterForm() {
     <div className="box">
       <form className="registerForm" onSubmit={ handleSubmit(onSubmit) }>
         <label htmlFor="name">
-          <p>Nome: </p>
+          <p className="registerLabel">Nome: </p>
           <input
+            className="registerInput"
             data-testid="common_register__input-name"
             name="name"
             type="text"
@@ -34,8 +35,9 @@ function RegisterForm() {
         </label>
 
         <label htmlFor="email">
-          <p>Email: </p>
+          <p className="registerLabel">Email: </p>
           <input
+            className="registerInput"
             data-testid="common_register__input-email"
             name="email"
             type="email"
@@ -44,8 +46,9 @@ function RegisterForm() {
         </label>
 
         <label htmlFor="password">
-          <p>senha:</p>
+          <p className="registerLabel">senha:</p>
           <input
+            className="registerInput"
             data-testid="common_register__input-password"
             name="password"
             type="password"
@@ -54,6 +57,7 @@ function RegisterForm() {
         </label>
 
         <button
+          className="registesBtn"
           data-testid="common_register__button-register"
           type="submit"
           disabled={ !isDirty || !isValid }
