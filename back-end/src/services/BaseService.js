@@ -11,7 +11,6 @@ class BaseService {
   }
 
   async getAll(where = {}) {
-    console.log(where);
     const entity = await this.model.findAll({ where });
     return entity;
   }
