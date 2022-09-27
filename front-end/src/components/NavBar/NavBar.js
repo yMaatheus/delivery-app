@@ -6,6 +6,7 @@ function NavBar() {
   const { user, logout } = useUser();
   const { push } = useHistory();
   const pathname = useLocation();
+  console.log(user);
 
   const goToProducts = () => {
     if (pathname === '/customer/products') return;
