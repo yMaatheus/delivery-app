@@ -2,7 +2,7 @@ import NavBar from '../components/NavBar/NavBar';
 
 function Customer() {
   return (
-    <NavBar />
+    <NavBar client="customer" />
   );
 }
 
