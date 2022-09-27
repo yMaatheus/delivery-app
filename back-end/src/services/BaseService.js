@@ -10,13 +10,14 @@ class BaseService {
     return created.get();
   }
 
-  async getAll() {
-    const entity = await this.model.findAll();
+  async getAll(where = {}) {
+    console.log(where);
+    const entity = await this.model.findAll({ where });
     return entity;
   }
 
-  async getOne(where) {
-    const entity = await this.model.findOne(where);
+  async getOne(id) {
+    const entity = await this.model.findOne({ where: { id } });
     if (!entity) throw new AppError(`${this.model.tableName} does not exist`);
     return entity;
   }

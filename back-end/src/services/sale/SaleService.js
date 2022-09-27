@@ -53,7 +53,7 @@ class SaleService extends BaseService {
     return body;
   }
 
-  async getOne(where) {
+  async getOneDetails(where) {
     const entity = await SaleService.getSaleDetails(where);
     if (!entity) {
       throw new AppError(`${this.model.tableName} does not exist`, StatusCodes.NOT_FOUND);
