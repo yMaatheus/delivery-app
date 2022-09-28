@@ -17,7 +17,7 @@ function Admin() {
 
   return (
     <>
-      <NavBar />
+      <NavBar client="admin" />
       <UserForm setUsers={ setUsers } />
       <UserList users={ users } />
     </>
