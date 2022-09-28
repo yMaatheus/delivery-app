@@ -1,17 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { getAll } from '../../services/admin';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function UserList() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    async function getUsers() {
-      const response = await getAll();
-      setUsers(response);
-    }
-    getUsers();
-  }, []);
-
+function UserList({ users }) {
   return (
     <div>
       <h2>Lista de usuários</h2>
@@ -63,5 +53,14 @@ function UserList() {
     </div>
   );
 }
+
+UserList.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
+  })).isRequired,
+};
 
 export default UserList;
