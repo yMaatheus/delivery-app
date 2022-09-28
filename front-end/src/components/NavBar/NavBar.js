@@ -10,7 +10,7 @@ function NavBar({ client }) {
   const [navTitle, setNavTitle] = useState('');
   const { user, logout } = useUser();
   const { push } = useHistory();
-  const pathname = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     switch (client) {
@@ -30,11 +30,13 @@ function NavBar({ client }) {
   }, [client, push]);
 
   const goToUrl = () => {
+    console.log(url);
     push(url);
   };
 
   const goToOrders = () => {
     if (pathname === '/customer/orders') return;
+    console.log(pathname);
     push('/customer/orders');
   };
 

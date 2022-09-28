@@ -12,6 +12,7 @@ function AuthenticatedApp() {
     <Switch>
       <Route exact path="/customer/products" component={ Customer } />
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
+      <Route exact path="/customer/orders/" component={ Seller } />
       <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
       <Route exact path="/seller/orders" component={ Seller } />
       <Route exact path="/seller/orders/:id" component={ OrdersDetails } />
