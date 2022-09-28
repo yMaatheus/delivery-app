@@ -5,8 +5,11 @@ import { useHistory } from 'react-router-dom';
 function OrderCard({ id, status, saleDate, totalPrice, deliveryAddress,
   deliveryNumber }) {
   const history = useHistory();
+  const handleClick = () => {
+    history.push(`/seller/orders/${id}`);
+  };
   return (
-    <button type="button" onClick={ () => history.push(`seller/orders/${id}`) }>
+    <button type="button" onClick={ handleClick }>
       <span data-testid={ `seller_orders__element-order-id-${id}` }>
         {`Pedido ${id} `}
       </span>
