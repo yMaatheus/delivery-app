@@ -13,9 +13,10 @@ function AuthenticatedApp() {
       <Route exact path="/customer/products" component={ Customer } />
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
       <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
-      <Route exact path="/seller" component={ Seller } />
+      <Route exact path="/seller/orders" component={ Seller } />
+      <Route exact path="/seller/orders/:id" component={ OrdersDetails } />
       {
-        (user?.role === 'seller' && <Redirect to="/seller" />)
+        (user?.role === 'seller' && <Redirect to="/seller/orders" />)
         || (user?.role === 'customer' && <Redirect to="/customer/products" />)
       }
     </Switch>

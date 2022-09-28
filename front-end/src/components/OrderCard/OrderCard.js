@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function OrderCard({ id, status, saleDate, totalPrice, deliveryAddress,
   deliveryNumber }) {
+  const history = useHistory();
   return (
-    <div>
+    <button type="button" onClick={ () => history.push(`seller/orders/${id}`) }>
       <span data-testid={ `seller_orders__element-order-id-${id}` }>
         {`Pedido ${id} `}
       </span>
@@ -23,7 +25,7 @@ function OrderCard({ id, status, saleDate, totalPrice, deliveryAddress,
         {' '}
         {deliveryNumber}
       </span>
-    </div>
+    </button>
   );
 }
 

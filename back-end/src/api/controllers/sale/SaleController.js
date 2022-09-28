@@ -14,7 +14,7 @@ class SaleController extends BaseController {
 
   async getOneDetails(req, res) {
     const { id } = req.params;
-    const request = await this.service.getOne({ id });
+    const request = await this.service.getOneDetails({ id });
     return res.status(StatusCodes.OK).json(request);
   }
 }
