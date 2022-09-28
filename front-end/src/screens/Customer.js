@@ -5,7 +5,7 @@ import ProductList from '../components/ProductList';
 function Customer() {
   return (
     <>
-      <NavBar />
+      <NavBar cliente="customer" />
       <ProductList />
     </>
   );

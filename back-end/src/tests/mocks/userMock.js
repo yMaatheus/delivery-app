@@ -22,9 +22,17 @@ const userMockWithId = {
   get: () => userMockWithId,
 }
 
+const loginPayLoad = {
+  id: 1,
+  name: 'Delivery App Admin',
+  email: 'adm@deliveryapp.com',
+  role: 'administrator',
+  token: 'TOKEN_VALIDO',
+}
+
 const userValidMock = {
   email: 'adm@deliveryapp.com',
   password: '--adm2@21!!--',
 }
 
-module.exports = { userMock, userMockWithId, userMockSequelize, userValidMock }
+module.exports = { userMock, userMockWithId, userMockSequelize, userValidMock, loginPayLoad }
