@@ -2,6 +2,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { useUser } from './context/user-context';
 import Customer from './screens/Customer';
 import CustomerCheckout from './screens/CustomerCheckout';
+import OrdersDetails from './screens/OrdersDetails';
 import Seller from './screens/Seller';
 
 function AuthenticatedApp() {
@@ -11,6 +12,7 @@ function AuthenticatedApp() {
     <Switch>
       <Route exact path="/customer/products" component={ Customer } />
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
+      <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
       <Route exact path="/seller" component={ Seller } />
       {
         (user?.role === 'seller' && <Redirect to="/seller" />)
