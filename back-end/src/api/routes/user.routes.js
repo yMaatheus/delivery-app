@@ -9,5 +9,6 @@ router.route('/')
   .post((req, res) => userController.register(req, res));
 
 router.get('/me', authMiddleware, (req, res) => res.status(StatusCodes.OK).json(req.user));
+router.get('/search', (req, res) => userController.getByRole(req, res));
 
 module.exports = router;

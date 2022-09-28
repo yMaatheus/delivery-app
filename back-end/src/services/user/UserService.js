@@ -32,6 +32,12 @@ class UserService extends BaseService {
     return { ...payload, token };
   }
 
+  async getByRole(role) {
+    const users = await this.model.findAll({ where: { role } });
+    if (!users) throw new AppError(`${this.model.tableName} does not exist`);
+    return users;
+  }
+
   async create(body) {
     userCreateValidator(body);
     const { password } = body;
