@@ -13,6 +13,12 @@ class UserController extends BaseController {
     return res.status(StatusCodes.CREATED).json(user);
   }
 
+  async getByRole(req, res) {
+    const { role } = req.query;
+    const users = await this.service.getByRole(role);
+    return res.status(StatusCodes.OK).json(users);
+  }
+
   async login(req, res) {
     const payload = await this.service.login(req.body.email, req.body.password);
     return res.status(StatusCodes.OK).json(payload);
