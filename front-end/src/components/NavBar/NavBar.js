@@ -11,7 +11,6 @@ function NavBar({ client }) {
   const { user, logout } = useUser();
   const { push } = useHistory();
   const pathname = useLocation();
-  console.log(user);
 
   useEffect(() => {
     switch (client) {
