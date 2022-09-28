@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useProductsStore from '../../store/productStore';
 
 const TABLE_HEADERS = [
   'Item',
@@ -10,24 +11,24 @@ const TABLE_HEADERS = [
 ];
 
 function OrdersTable() {
-  let cart = localStorage.getItem('carrinho');
+  const [cart, setCart] = useProductsStore((state) => [
+    state.cart,
+    state.setCart,
+  ]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [Cart, setCart] = useState(cart);
 
   useEffect(() => {
-    const total = Cart?.reduce((acc, { price, quantity }) => acc + price * quantity, 0)
+    const total = cart?.reduce((acc, { price, quantity }) => acc + price * quantity, 0)
       || 0;
     setTotalPrice(total);
-  }, [Cart]);
+  }, [cart]);
 
   const handleRemove = (index) => {
-    const newCart = Cart.filter((_item, i) => i !== index);
-    localStorage.setItem('carrinho', newCart);
-    cart = localStorage.getItem('carrinho');
-    setCart(cart);
+    const newCart = cart.filter((_item, i) => i !== index);
+    setCart(newCart);
   };
 
-  const renderTBody = () => Cart?.map(({ description, quantity, price }, i) => (
+  const renderTBody = () => cart?.map(({ name, quantity, price }, i) => (
     <tr key={ i }>
       <td
         data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
@@ -35,7 +36,7 @@ function OrdersTable() {
         {i + 1}
       </td>
       <td data-testid={ `customer_checkout__element-order-table-name-${i}` }>
-        {description}
+        {name}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
@@ -45,12 +46,15 @@ function OrdersTable() {
       <td
         data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
       >
-        {price}
+        {`R$ ${Number(price).toFixed(2).toString().replace(/\./, ',')}`}
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
       >
-        {price * quantity}
+        {`R$ ${Number(price * quantity)
+          .toFixed(2)
+          .toString()
+          .replace(/\./, ',')}`}
       </td>
       <td>
         <button
@@ -75,7 +79,13 @@ function OrdersTable() {
         <tbody>{renderTBody()}</tbody>
       </table>
       <div>
-        <span>{`Total: ${totalPrice}`}</span>
+        <span data-testid="customer_checkout__element-order-total-price">
+          {`Total: R$ ${totalPrice
+            .toFixed(2)
+            .toString()
+            .replace(/\./, ',')}`}
+
+        </span>
       </div>
     </div>
   );
