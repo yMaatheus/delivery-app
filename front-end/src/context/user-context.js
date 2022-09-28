@@ -1,7 +1,8 @@
 const { useCallback, useEffect, useContext, useMemo } = require('react');
 const { useState } = require('react');
 const { createContext } = require('react');
-const { setToken, clearToken, getToken } = require('../helpers/auth');
+const { setUserLocal, setToken, clearToken, getToken,
+  clearUser } = require('../helpers/auth');
 const { getMe, login: loginUser, register: registerUser } = require('../services/users');
 
 const UserContext = createContext({});
@@ -16,6 +17,7 @@ function UserProvider(props) {
     try {
       if (token) {
         const userResponse = await getMe();
+        setUserLocal(userResponse);
         return setUser(userResponse);
       }
     } catch (error) {
@@ -34,6 +36,7 @@ function UserProvider(props) {
       const loginResponse = await loginUser(credentials);
       console.log(loginResponse);
       setToken(loginResponse.token);
+      setUserLocal(loginResponse);
       setUser(loginResponse);
     } catch (error) {
       console.log('error', error);
@@ -52,6 +55,7 @@ function UserProvider(props) {
 
   const logout = () => {
     clearToken();
+    clearUser();
     setUser(null);
   };
 
