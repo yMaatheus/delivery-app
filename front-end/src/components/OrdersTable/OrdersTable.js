@@ -14,13 +14,10 @@ function OrdersTable() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [Cart, setCart] = useState(cart);
 
-  const getTotalPrice = (arr) => arr?.forEach(({ price, quantity }) => {
-    const total = (Number(price) * Number(quantity));
-    setTotalPrice(totalPrice + total);
-  });
-
   useEffect(() => {
-    getTotalPrice(cart);
+    const total = Cart?.reduce((acc, { price, quantity }) => acc + price * quantity, 0)
+      || 0;
+    setTotalPrice(total);
   }, [Cart]);
 
   const handleRemove = (index) => {
@@ -37,9 +34,7 @@ function OrdersTable() {
       >
         {i + 1}
       </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-name-${i}` }
-      >
+      <td data-testid={ `customer_checkout__element-order-table-name-${i}` }>
         {description}
       </td>
       <td
@@ -77,12 +72,10 @@ function OrdersTable() {
             <th key={ header }>{header}</th>
           ))}
         </thead>
-        <tbody>
-          {renderTBody()}
-        </tbody>
+        <tbody>{renderTBody()}</tbody>
       </table>
       <div>
-        <span>{ `Total: ${totalPrice}` }</span>
+        <span>{`Total: ${totalPrice}`}</span>
       </div>
     </div>
   );
