@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getByRole } from '../../services/users';
 import useProductsStore from '../../store/productStore';
-import addSale from '../../services/sales';
+import { addSale } from '../../services/sales';
 
 const SALE_INITIAL_STATE = {
   sale: {

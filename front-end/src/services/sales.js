@@ -1,5 +1,5 @@
 import api from './api';
 
-const addSale = (data) => api.post('/sales', { ...data });
+export const addSale = (data) => api.post('/sales', { ...data });
 
-export default addSale;
+export const getBySellerId = (sellerId) => api.get('/sales/find', sellerId);
