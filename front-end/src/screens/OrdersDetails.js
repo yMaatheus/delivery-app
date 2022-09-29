@@ -25,7 +25,10 @@ function OrdersDetails() {
 
   const { products } = details;
 
-  const totalPrice = products.reduce((acc, curr) => acc + (curr.price * quantity), 0);
+  const totalPrice = products?.reduce(
+    (acc, curr) => acc + curr.price * curr.quantity,
+    0,
+  );
 
   return (
     <>
@@ -37,7 +40,11 @@ function OrdersDetails() {
           <DetailsDescription { ...details } />
           <OrderTable products={ products } />
           <p data-testid="customer_order_details__element-order-total-price">
-            {`Total: ${totalPrice}`}
+            {
+              `Total: R$ ${totalPrice.toFixed(2)
+                .toString()
+                .replace(/\./, ',')}`
+            }
           </p>
         </>
       )}
