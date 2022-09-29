@@ -25,16 +25,22 @@ function OrdersDetails() {
 
   const { products } = details;
 
+  const totalPrice = products.reduce((acc, curr) => acc + (curr.price * quantity), 0);
+
   return (
     <>
       <NavBar client={ user?.role } />
-      {loading ? <p>carregando...</p> : (
+      {loading ? (
+        <p>carregando...</p>
+      ) : (
         <>
           <DetailsDescription { ...details } />
           <OrderTable products={ products } />
+          <p data-testid="customer_order_details__element-order-total-price">
+            {`Total: ${totalPrice}`}
+          </p>
         </>
       )}
-
     </>
   );
 }
