@@ -21,7 +21,7 @@ function Orders() {
 
   useEffect(() => {
     switch (user.role) {
-    case 'client':
+    case 'customer':
       getUserOrders();
       break;
     default:
