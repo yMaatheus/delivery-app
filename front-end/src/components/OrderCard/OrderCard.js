@@ -8,6 +8,7 @@ const makeDate = (date) => `${date.getDate()}/${(date.getMonth() + 1).toString()
 function OrderCard({ id, status, saleDate, totalPrice, deliveryAddress,
   deliveryNumber, role }) {
   const history = useHistory();
+
   const handleClick = () => {
     history.push(`/${role}/orders/${id}`);
   };
