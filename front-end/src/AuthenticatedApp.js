@@ -1,5 +1,6 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useUser } from './context/user-context';
+import Admin from './screens/Admin';
 import Customer from './screens/Customer';
 import CustomerCheckout from './screens/CustomerCheckout';
 import OrdersDetails from './screens/OrdersDetails';
@@ -14,11 +15,13 @@ function AuthenticatedApp() {
       <Route exact path="/customer/checkout" component={ CustomerCheckout } />
       <Route exact path="/customer/orders/" component={ Seller } />
       <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
+      <Route exact path="/admin/manage" component={ Admin } />
       <Route exact path="/seller/orders" component={ Seller } />
       <Route exact path="/seller/orders/:id" component={ OrdersDetails } />
       {
         (user?.role === 'seller' && <Redirect to="/seller/orders" />)
         || (user?.role === 'customer' && <Redirect to="/customer/products" />)
+        || (user?.role === 'administrator' && <Redirect to="/admin/manage" />)
       }
     </Switch>
   );
