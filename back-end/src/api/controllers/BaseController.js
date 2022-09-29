@@ -11,6 +11,7 @@ class BaseController {
   }
 
   async getAll(req, res) {
+    console.log(req.body);
     const request = await this.service.getAll(req.body);
     return res.status(StatusCodes.OK).json(request);
   }

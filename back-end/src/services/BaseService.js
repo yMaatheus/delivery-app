@@ -10,8 +10,8 @@ class BaseService {
     return created.get();
   }
 
-  async getAll(where = {}) {
-    const entity = await this.model.findAll({ where });
+  async getAll() {
+    const entity = await this.model.findAll();
     return entity;
   }
 
