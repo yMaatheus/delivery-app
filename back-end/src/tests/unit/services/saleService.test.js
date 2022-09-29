@@ -89,7 +89,7 @@ describe('Sale Service', () => {
   describe('getOne', () => {
     it('Success', async () => {
       sinon.stub(SaleService, 'getSaleDetails').resolves(saleDetailsMock);
-      const result = await saleService.getOne({ id: 1 });
+      const result = await saleService.getOneDetails({ id: 1 });
 
       expect(result).to.be.have.property('id');
       expect(result.id).to.equal(1);
