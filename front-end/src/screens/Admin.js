@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
-import NavBar from '../components/NavBar/NavBar';
-import UserForm from '../components/UserForm/UserForm';
-import UserList from '../components/UserList/UserList';
+import NavBar from '../components/NavBar';
+import UserForm from '../components/UserForm';
+import UserList from '../components/UserList';
 import { getAllUsers } from '../services/admin';
 
 function Admin() {
@@ -18,22 +17,9 @@ function Admin() {
 
   return (
     <>
-      <NavBar />
+      <NavBar client="admin" />
       <UserForm setUsers={ setUsers } />
       <UserList users={ users } />
-=======
-import React from 'react';
-import NavBar from '../components/NavBar/NavBar';
-import UserForm from '../components/UserForm/UserForm';
-import UserList from '../components/UserList/UserList';
-
-function Admin() {
-  return (
-    <>
-      <NavBar />
-      <UserForm />
-      <UserList />
->>>>>>> feat: :sparkles: add screen admin and components user list and user form
     </>
   );
 }

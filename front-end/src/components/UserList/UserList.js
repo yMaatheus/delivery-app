@@ -1,24 +1,7 @@
-<<<<<<< HEAD
 import React from 'react';
 import PropTypes from 'prop-types';
 
 function UserList({ users }) {
-=======
-import React, { useEffect, useState } from 'react';
-import { getAll } from '../../services/admin';
-
-function UserList() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    async function getUsers() {
-      const response = await getAll();
-      setUsers(response);
-    }
-    getUsers();
-  }, []);
-
->>>>>>> feat: :sparkles: add screen admin and components user list and user form
   return (
     <div>
       <h2>Lista de usuários</h2>
@@ -33,7 +16,7 @@ function UserList() {
           </tr>
         </thead>
         <tbody>
-          { users.map(({ id, name, email, role }) => (
+          { users?.map(({ id, name, email, role }) => (
             <tr key={ id }>
               <td
                 data-testid={ `admin_manage__element-user-table-item-number-${id}` }
@@ -71,7 +54,6 @@ function UserList() {
   );
 }
 
-<<<<<<< HEAD
 UserList.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
@@ -81,6 +63,4 @@ UserList.propTypes = {
   })).isRequired,
 };
 
-=======
->>>>>>> feat: :sparkles: add screen admin and components user list and user form
 export default UserList;
