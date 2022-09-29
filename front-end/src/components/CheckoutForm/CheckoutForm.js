@@ -38,10 +38,7 @@ function CheckoutForm() {
         (acc, { price, quantity }) => acc + price * quantity,
         0,
       );
-      setSales({
-        sale: { ...SALE_INITIAL_STATE.sale, totalPrice, userId },
-        product,
-      });
+      setSales({ sale: { ...SALE_INITIAL_STATE.sale, totalPrice, userId }, product });
     };
     getSaleInfo();
     fetchSellers();

@@ -5,7 +5,7 @@ import { ScopedCssBaseline } from '@mui/material';
 import UnauthenticatedApp from './UnauthenticatedApp';
 
 import { useUser } from './context/user-context';
-import AuthenticatedApp from './AuthenyicatedApp';
+import AuthenticatedApp from './AuthenticatedApp';
 
 function App() {
   const { user } = useUser();
