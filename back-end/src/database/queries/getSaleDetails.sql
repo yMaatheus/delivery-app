@@ -1,4 +1,4 @@
-SELECT sales.id, sales.status, sales.sale_date as saleDate, users.name as customer, delivery_address, delivery_number, seller.name as seller, JSON_ARRAYAGG(JSON_OBJECT('name', products.name, 'quantity', sp.quantity)) AS products
+SELECT sales.id, users.name as customer, sales.status, sales.sale_date as date, delivery_address, delivery_number, seller.name as seller, JSON_ARRAYAGG(JSON_OBJECT('name', products.name, 'price', products.price, 'quantity', sp.quantity)) AS products
 FROM `delivery-app-dev`.sales sales
 INNER JOIN `delivery-app-dev`.users users
 ON sales.user_id = users.id
