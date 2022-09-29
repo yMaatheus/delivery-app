@@ -60,6 +60,13 @@ class SaleService extends BaseService {
     }
     return entity;
   }
+
+  async getAllByQuery(query) {
+    const entity = await this.model.findAll({
+      where: query,
+    });
+    return entity;
+  }
 }
 
 module.exports = SaleService;
