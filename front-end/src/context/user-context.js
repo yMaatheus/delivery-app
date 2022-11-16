@@ -8,7 +8,6 @@ const { getMe, login: loginUser, register: registerUser } = require('../services
 const UserContext = createContext({});
 
 function UserProvider(props) {
-  const [isFetchingUser, setIsFetchingUser] = useState(true);
   const [user, setUser] = useState(null);
 
   const fetchUser = useCallback(async () => {
@@ -22,8 +21,6 @@ function UserProvider(props) {
       }
     } catch (error) {
       console.log('error', error);
-    } finally {
-      setIsFetchingUser(false);
     }
   }, []);
 
@@ -61,11 +58,10 @@ function UserProvider(props) {
 
   const valueToExport = useMemo(() => ({
     user,
-    isFetchingUser,
     login,
     register,
     logout,
-  }), [isFetchingUser, login, register, user]);
+  }), [login, register, user]);
 
   return (
     <UserContext.Provider

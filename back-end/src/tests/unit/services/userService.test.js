@@ -50,7 +50,6 @@ describe('User Service', () => {
         try {
           await userService.login({ email: 'fakeEmail', password: 'fakePassword' });
         } catch (err) {
-          console.log(err);
           error = err
         }
         expect(error).to.be.instanceOf(AppError);
