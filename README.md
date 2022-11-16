@@ -26,7 +26,7 @@ Para ter acesso aos arquivos do projeto você pode clonar usando o seguinte coma
 git clone git@github.com:yMaatheus/project-delivery-app.git
 ```
 
-### 🔧 Instalação
+### 🎉 Iniciar
 
 ```
 npm start
