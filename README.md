@@ -1,6 +1,6 @@
 # App de Delivery
 
-Neste projeto, meu grupo desenvolveu um app de delivery para uma distribuidora de bebidas.
+Neste projeto, meu grupo desenvolveu um aplicativo de delivery para uma distribuidora de bebidas.
 
 ## 📱 Projeto
 
