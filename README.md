@@ -2,6 +2,8 @@
 
 Neste projeto, meu grupo desenvolveu um aplicativo de delivery para uma distribuidora de bebidas.
 
+[Documentação](https://documenter.getpostman.com/view/21401984/2s7ZE1Q7MS)
+
 ## 📱 Projeto
 
 Nessa aplicação, meu grupo foi responsável por criar e integrar tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja.
@@ -39,6 +41,7 @@ npm start
 * [React](http://www.dropwizard.io/1.0.2/docs/) - Framework web
 * [Express](https://expressjs.com/pt-br/) - Framework de aplicativo da web Node.js
 * [Sequelize](https://sequelize.org) - Ferramenta ORM Node.js fácil de usar e baseada em promessas
+
 
 <details>
   <summary>
