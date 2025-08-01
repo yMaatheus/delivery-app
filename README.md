@@ -8,8 +8,6 @@ Neste projeto, meu grupo desenvolveu um aplicativo de delivery para uma distribu
 
 Nessa aplicação, meu grupo foi responsável por criar e integrar tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja.
 
-Último projeto do módulo de Back-end que fiz na [Trybe](https://www.betrybe.com/).
-
 ### 📋 Pré-requisitos
 
 Para conseguir seguir este README e rodar o projeto você pode precisar dos seguintes itens:
@@ -79,10 +77,3 @@ npm start
     - *uso (na raiz do projeto): `npm run test:dev:report`, `npm run test:dev:report "01login 02register"` ou ainda `npm run test:dev:report "01 02"`*;
 
 </details>
-
-## ✒️ Autores
-
-* **[Matheus Henrique](https://github.com/yMaatheus)**
-* **[Lucas Alves](https://github.com/lucasdoloh0v)**
-* **[Cássius Queiroz Bessa](https://github.com/cassiusbessa)**
-* **[André Rodrigues Santos](https://github.com/Andre-ARS)**
